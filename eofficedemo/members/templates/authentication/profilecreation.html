@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}Tạo thông tin nhân sự{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+        
+                <div class="card">
+                  </br>
+                    
+                  <div class="row">
+          
+                    <div class="col-sm-1">
+                    </div>
+          
+                    <div class="col-sm-10">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <img src="/media/logo.png" class="responsive-img" style="max-height:100px;max-width:100px; padding:5px">
+                        </div>
+                        <div class="col-sm-8">
+                          
+                          <h6>THÔNG TIN NHÂN SỰ</h6>
+                          
+                          {% comment %} <small><small>Ngày viết đơn: <a class="text-danger">{{form.date|date:"d/m/Y"}}</a></small></small> {% endcomment %}
+                          
+                        </div>
+          
+                        <div class="col-sm-1">
+                        </div>
+          
+                      </div>
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-1">
+                    </div>
+          
+                    <div class="col-sm-10">
+                      
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="statichovaten" class="col-sm-3 col-form-label">Họ và tên:</label>
+                          <div class="col-sm-3">
+                            {{form.hovaten}}
+                          </div>
+                          <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                          <label for="staticmsnv" class="col-sm-2 col-form-label">MSNV:</label>
+                          <div class="col-sm-2">
+                            {{form.msnv}}
+                            </div>
+                        </div>
+                      </small></small>
+                      
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Phòng ban:</label>
+                          <div class="col-sm-3" id = "dateinput">
+                            {{form.phongban}}
+                          </div>
+                          <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                          <label for="staticmsnv" class="col-sm-2 col-form-label">Chúc danh:</label>
+                          <div class="col-sm-3">
+                            {{form.chucdanh}}
+                          </div>
+                        </div>
+                      </small></small>
+                      
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Giới tính:</label>
+                          <div class="col-sm-3">
+                            {{form.gioitinh}}
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Ngày sinh:</label>
+                          <div class="col-sm-6">
+                            {{form.ngaysinh}}
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Ảnh đại diện:</label>
+                          <div class="col-sm-6">
+                            {{form.photo}}
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Điện thoại liên hệ:</label>
+                          <div class="col-sm-6">
+                            {{form.phone}}
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Ngày vào công ty</label>
+                          <div class="col-sm-6">
+                            {{form.ngayvaocty}}
+                          </div>
+                        </div>
+                      </small></small>
+                      
+                    
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
+                  </div>
+                  </br>
+                </div>
+                
+                </br>
+                
+              </div>
+            
+            <center><button class="btn btn-secondary btn-sm">Khởi tạo</button></center>
+        </form>
+    {% else %}
+        You are not allowed here!
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    
+    
+  </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).on('change', '#id_date_from', function (e) {
+    
+        
+        let datefrom = new Date(document.querySelector("#id_date_from").value).getTime();
+        let dateend = new Date(document.querySelector("#id_date_end").value).getTime();
+        let num = Math.ceil((dateend - datefrom) / (24*60*60*1000));
+        
+        document.querySelector("#id_numday").value = num + 1
+        
+        
+    })
+    $(document).on('change', '#id_date_end', function (e) {
+    
+        
+        let datefrom = new Date(document.querySelector("#id_date_from").value).getTime();
+        let dateend = new Date(document.querySelector("#id_date_end").value).getTime();
+        let num = Math.ceil((dateend - datefrom) / (24*60*60*1000));
+        
+        document.querySelector("#id_numday").value = num + 1
+        
+        
+        
+    })
+</script>
+{% endblock javascript %}
