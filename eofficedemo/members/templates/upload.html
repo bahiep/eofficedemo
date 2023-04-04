@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Thêm nhân sự{% endblock %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="my_file" />
+        <button class="btn btn-success btn-sm me-md-2" type="submit">Upload</button>
+    <form>
+    </br>
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+{% endblock %}

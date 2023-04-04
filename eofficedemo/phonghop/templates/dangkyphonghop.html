@@ -1,0 +1,522 @@
+{% extends "base.html" %}
+
+{% block title %}Đăng ký phòng họp{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+      <div id="post-form" data-post-id="{{ post.id }}">
+        <h3><center></center></h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+        
+              <div class="card">
+              </br>
+                
+              <div class="row">
+      
+                <div class="col-sm-1">
+                </div>
+      
+                <div class="col-sm-10">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <img src="/media/logo.png" class="responsive-img" style="max-height:100px;max-width:100px; padding:5px">
+                    </div>
+                    <div class="col-sm-8">
+                      
+                      <h6>ĐĂNG KÝ PHÒNG HỌP</h6>
+                      <small><small>Bộ phận: {{request.user.profile.phongban.name}}</small></small></br>
+                      {% comment %} <small><small>Ngày viết đơn: <a class="text-danger">{{form.date|date:"d/m/Y"}}</a></small></small> {% endcomment %}
+                      
+                    </div>
+      
+                    <div class="col-sm-1">
+                    </div>
+      
+                  </div>
+                </div>
+                <div class="col-sm-1">
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-1">
+                </div>
+      
+                <div class="col-sm-10">
+                  
+                  <small><small>
+                    <div class="mb-1 row">
+                      <label for="statichovaten" class="col-sm-3 col-form-label">Họ và tên:</label>
+                      <div class="col-sm-4">
+                        <input class="form-control form-control-sm" type="text" value="{{post.author.profile.hovaten}}" aria-label="readonly input example" readonly>
+                      </div>
+                      <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                      <label for="staticmsnv" class="col-sm-2 col-form-label">MSNV:</label>
+                      <div class="col-sm-2">
+                        <input class="form-control form-control-sm" type="text" value="VTC-{{post.author.profile.msnv}}" aria-label="readonly input example" readonly>
+                      </div>
+                    </div>
+                  </small></small>
+                  <small><small>
+                    <div class="mb-1 row">
+                      <label for="staticmsnv" class="col-sm-3 col-form-label">Ngày họp:</label>
+                      <div class="col-sm-3">
+                        {{editform.date}}
+                      </div>
+                    </div>
+                  </small></small>
+                  
+                  <small><small>
+                    <div class="mb-1 row">
+                      <label for="staticmsnv" class="col-sm-3 col-form-label">Từ:</label>
+                      <div class="col-sm-3" id = "dateinput">
+                        {{editform.time_from}}
+                      </div>
+                      <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                      <label for="staticmsnv" class="col-sm-2 col-form-label">Đến:</label>
+                      <div class="col-sm-3">
+                        {{editform.time_end}}
+                      </div>
+                    </div>
+                  </small></small>
+                  
+                  <small><small>
+                    <div class="mb-1 row">
+                      <label for="staticmsnv" class="col-sm-3 col-form-label">Số người:</label>
+                      <div class="col-sm-3">
+                        {{editform.num_per}}
+                      </div>
+                    </div>
+                  </small></small>
+                  <small><small>
+                    <div class="mb-1 row">
+                      <label for="staticmsnv" class="col-sm-3 col-form-label">Tiêu đề cuộc họp:</label>
+                      <div class="col-sm-6">
+                        {{editform.title}}
+                      </div>
+                    </div>
+                  </small></small>
+                  
+                  <small><small>
+                    <div class="mb-1 row">
+                      <label for="staticmsnv" class="col-sm-3 col-form-label">Hình thức</label>
+                      <div class="col-sm-6">
+                        {{editform.kind}}
+                      </div>
+                    </div>
+                  </small></small>
+                  <small><small>
+                    <div class="mb-1 row">
+                      <label for="staticmsnv" class="col-sm-3 col-form-label">Phòng họp</label>
+                      <div class="col-sm-6">
+                        {{editform.room}}
+                      </div>
+                    </div>
+                  </small></small>
+                  
+                  <small><small>
+                    <div class="mb-1 row">
+                      <label for="staticmsnv" class="col-sm-3 col-form-label">Điện thoại liên hệ:</label>
+                      <div class="col-sm-6">
+                        <input class="form-control form-control-sm" rows="3" type="text" value="{{request.user.profile.phone}}" aria-label="readonly input example" readonly>
+                      </div>
+                    </div>
+                  </small></small>
+                </div>
+                <div class="col-sm-1">
+                </div>
+              </div>
+              </br>
+            </div>
+            
+            </br>
+            <div class="card">
+    
+              <div class="row">
+                <div class="col-sm-1">
+      
+                </div>
+                
+                <div class="col-sm-10">
+                    
+                  <div class="row">
+                    
+                    <table class="table-responsive table table-striped table-sm">
+                      
+                      <tbody>
+                        <tr>
+                          <td class="col-sm-4">
+                            <small><small><strong>{{post.author}}</strong></small></small>
+                            <small><small><small><small><small><i>Gửi yêu cầu {{post.created|date:"d/m/Y-h:m"}}</i></small></small></small></small></small>
+                          </td>
+                          <td class="col-sm-8">
+      
+                          </td>
+                        </tr>
+                        {% for comment in post.comments.all %}
+                          <tr>
+                            <td>
+                                <small><small><strong>{{comment.author}}</strong></small></small>
+                                <small><small><small><small><small><i>{{comment.status}} {{comment.date|date:"d/m/Y-h:m"}}</i></small></small></small></small></small>
+                            </td>
+                            <td>
+                                <small><small><small>{{comment.body}}</small></small></small>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                        
+                        
+                      </tbody>
+                    </table>
+                    {% comment %} {% for comment in post.comments.all %}
+                    <div class="col-sm-4">
+                      <small><small><strong>{{comment.author}}</strong></small></small>
+                      <small><small><small><small><i>{{comment.status}} {{comment.date|date:"d/m/Y-h:m"}}</i></small></small></small></small>
+                    </div>
+                    <div class="col-sm-8">
+                      <small><small><small>{{comment.body}}</small></small></small>
+                    </div>
+                    {% endfor %} {% endcomment %}
+      
+                  </div>
+                
+                
+                  
+                </div>
+                <div class="col-sm-1">
+      
+                </div>
+              </div>
+            </div> 
+            </br>
+            {% if user.is_authenticated %}
+              {% if post.status == 'request' %}
+                {% if request.user == post.approval %}
+                  <form action='{% url "post_detail" post.id %}' method='POST'>
+                      {% csrf_token %}
+                  
+                      <label><small><small>Ghi chú</small></small></label>
+                      {{form.body}}
+                      </br>
+                      <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+                        Không đồng ý
+                      </button>
+                      <button name="button" type='submit' id="like-button" value="{{post.id}}" class="btn btn-primary btn-sm">
+                        Đồng ý
+                      </button>
+                    </br>
+                      {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+                  </form>
+                {% endif %}
+                {% if request.user == post.author %}
+                  <form action='{% url "post_detail" post.id %}' method='POST'>
+                      {% csrf_token %}
+                  
+                      <label><small><small>Ghi chú</small></small></label>
+                      {{form.body}}
+                      </br>
+                      <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+                        Hủy
+                      </button>
+                      <button name="button" type='submit' id="like-button" value="{{post.pk}}" class="btn btn-primary btn-sm">
+                        Cập nhật
+                      </button>
+                      {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+                    </br>
+                  </form>
+                {% endif %}
+              {% endif %}
+              {% if post.status == 'waiting' %}
+                {% if request.user == post.approvalbod %}
+                  <form action='{% url "post_detail" post.id %}' method='POST'>
+                      {% csrf_token %}
+                  
+                      <label><small><small>Ghi chú</small></small></label>
+                      {{form.body}}
+                      </br>
+                      <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+                        Không đồng ý
+                      </button>
+                      <button name="button" type='submit' id="like-button" value="{{post.id}}" class="btn btn-primary btn-sm">
+                        Đồng ý
+                      </button>
+                    </br>
+                      {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+                  </form>
+                {% endif %}
+              {% endif %}
+              {% if post.status == 'rejected' %}
+                {% if request.user == post.author %}
+                  <form action='{% url "post_detail" post.id %}' method='POST'>
+                      {% csrf_token %}
+                  
+                      <label><small><small>Ghi chú</small></small></label>
+                      {{form.body}}
+                      </br>
+                      <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+                        Hủy
+                      </button>
+                      <button name="button" type='submit' id="like-button" value="{{post.pk}}" class="btn btn-primary btn-sm">
+                        Gửi lại
+                      </button>
+                      {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+                    </br>
+                  </form>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+                
+            </div>
+        </form>
+      </div>
+    {% else %}
+        You are not allowed here!
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    
+  //answer
+  function myFunctionA(id){
+      
+      var button = $(this).attr("value");
+      let contentbody = document.querySelector("#id_body").value;
+      $.ajax({
+          type: 'POST',
+          url: '{% url "dislike" %}',
+          data: {
+            postid: $('#like-button').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            contentbody: contentbody,
+            action: 'post'
+          },
+          success: function (json) {
+            console.log("OK chu")
+          },
+          error: function (xhr, errmsg, err) {
+            console.log("thua luon roi");
+          }
+      });
+  }
+
+  //like button
+
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).on('click', '#like-button', function (e) {
+  
+  var button = $(this).attr("value");
+  let contentbody = document.querySelector("#id_body").value;
+
+  $.ajax({
+    type: 'POST',
+    url: '{% url "like" %}',
+    data: {
+      postid: $('#like-button').val(),
+      csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      contentbody: contentbody,
+      action: 'post'
+    },
+    success: function (json) {
+      console.log("OK chu")
+    },
+    error: function (xhr, errmsg, err) {
+      console.log("thua luon roi");
+    }
+  });
+})
+</script>
+
+
+<script>
+  
+  $(document).on('change', '#id_room', function (e) {
+    let select = document.getElementById("id_time_from");
+    let options = select.options;
+    select.value = options[0].value;
+    let room = document.getElementById("id_room");
+    
+    for (let i = 0; i < options.length; i++) {
+      options[i].disabled = false;
+    }
+    
+    // Lấy dữ liệu bài post bằng AJAX
+    
+    fetch("{% url 'get_posts' %}")
+    .then(response => response.json())
+    .then(data => {
+      // Truyền dữ liệu vào template bằng JavaScript
+      const posts = data.posts;
+      posts.forEach(post => {
+        const selectdate = document.getElementById("id_date");
+        if (selectdate.value == post.date && room.value == post.room) {
+          const timeString = post.time_from;
+          const timeParts = timeString.split(":");
+          const hour = timeParts[0]; // Lấy giờ
+          const minute = timeParts[1]; // Lấy phút
+          const hm = hour + ":" + minute;
+
+          let startTime = post.time_from;
+          let endTime = post.time_end;
+          // Chuyển đổi thời gian đầu và cuối sang đối tượng Date
+          let startDate = new Date(`2000/01/01 ${startTime}`);
+          let endDate = new Date(`2000/01/01 ${endTime}`);
+          let times = [startTime];
+          
+          // Thêm các thời gian mới vào list với khoảng cách là 30 phút
+          let currentTime = startDate;
+          while (currentTime < endDate) {
+            
+            const hours = currentTime.getHours();
+            const minutes = currentTime.getMinutes();
+            const formattedTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0');
+            //Conditions
+            for (let i = 0; i < options.length; i++) {
+              if (options[i].value == formattedTime){
+                options[i].disabled = true;
+              }
+            }
+            //Step+
+            currentTime.setTime(currentTime.getTime() + 1800000);
+            times.push(currentTime.toLocaleTimeString('en-US', {hour12: false}));
+            console.log(formattedTime) 
+          }
+        }
+      });
+    })
+    .catch(error => console.error(error)); 
+  })
+</script>
+
+<script>
+  
+  $(document).on('change', '#id_date', function (e) {
+    let select = document.getElementById("id_time_from");
+    let options = select.options;
+    select.value = options[0].value;
+    let room = document.getElementById("id_room");
+    
+    for (let i = 0; i < options.length; i++) {
+      options[i].disabled = false;
+    }
+    
+    // Lấy dữ liệu bài post bằng AJAX
+    
+    fetch("{% url 'get_posts' %}")
+    .then(response => response.json())
+    .then(data => {
+      // Truyền dữ liệu vào template bằng JavaScript
+      const posts = data.posts;
+      posts.forEach(post => {
+        const selectdate = document.getElementById("id_date");
+        if (selectdate.value == post.date && room.value == post.room) {
+          const timeString = post.time_from;
+          const timeParts = timeString.split(":");
+          const hour = timeParts[0]; // Lấy giờ
+          const minute = timeParts[1]; // Lấy phút
+          const hm = hour + ":" + minute;
+
+          let startTime = post.time_from;
+          let endTime = post.time_end;
+          // Chuyển đổi thời gian đầu và cuối sang đối tượng Date
+          let startDate = new Date(`2000/01/01 ${startTime}`);
+          let endDate = new Date(`2000/01/01 ${endTime}`);
+          let times = [startTime];
+          
+          // Thêm các thời gian mới vào list với khoảng cách là 30 phút
+          let currentTime = startDate;
+          while (currentTime < endDate) {
+            
+            const hours = currentTime.getHours();
+            const minutes = currentTime.getMinutes();
+            const formattedTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0');
+            //Conditions
+            for (let i = 0; i < options.length; i++) {
+              if (options[i].value == formattedTime){
+                options[i].disabled = true;
+              }
+            }
+            //Step+
+            currentTime.setTime(currentTime.getTime() + 1800000);
+            times.push(currentTime.toLocaleTimeString('en-US', {hour12: false}));
+            console.log(formattedTime) 
+          }
+        }
+      });
+    })
+    .catch(error => console.error(error)); 
+  })
+</script>
+<script>
+  $(document).on('change', '#id_time_from', function (e) {
+    let select = document.getElementById("id_time_end");
+    let options = select.options;
+    select.value = options[0].value;
+    for (let i = 0; i < options.length; i++) {
+      options[i].disabled = true;
+    }
+    let selecta = document.getElementById("id_time_from");
+    let indexa = selecta.selectedIndex;
+    let optionsa = selecta.options;
+    let indexb;
+    for (let i = indexa; i < optionsa.length; i++) {
+      if (optionsa[i].disabled == true) {
+        indexb = i;
+        break;
+      }
+      else {
+        indexb = 23;
+      }
+    }
+    for (let j = indexa+1; j <= indexb; j++) {
+      options[j].disabled = false;
+    }
+      
+    
+  })
+</script>
+<script>
+  const postId = `{{post.pk}}`;
+  const timeFromInput = document.getElementById('id_time_from');
+  const timeEndInput = document.getElementById('id_time_end');
+  fetch("{% url 'get_post' post.pk %}")
+  .then(response => response.json())
+  .then(data => {
+    // Truyền dữ liệu vào các input trong form
+    const timeFromString = data.time_from;
+    const timeFromParts = timeFromString.split(":");
+    const hourFrom = timeFromParts[0]; // Lấy giờ
+    const minuteFrom = timeFromParts[1]; // Lấy phút
+    const timeFrom = hourFrom + ":" + minuteFrom;
+    //
+    const timeEndString = data.time_end;
+    const timeEndParts = timeEndString.split(":");
+    const hourEnd = timeEndParts[0]; // Lấy giờ
+    const minuteEnd = timeEndParts[1]; // Lấy phút
+    const timeEnd = hourEnd + ":" + minuteEnd;
+    timeFromInput.value = timeFrom;
+    timeEndInput.value = timeEnd;
+    
+  })
+  .catch(error => console.error(error));
+</script>
+<script>
+  const submitBtn = document.getElementById('like-button');
+  const timeFromInput2 = document.getElementById('id_time_from');
+  const timeEndInput2 = document.getElementById('id_time_end');
+
+  submitBtn.addEventListener('click', (event) => {
+    if (timeFromInput2.selectedIndex == 0 || timeEndInput2.selectedIndex == 0 ) {
+      event.preventDefault();
+      alert('Vui lòng kiểm tra thời gian bắt đầu hoặc kết thúc!');
+    }
+});
+
+</script>
+{% endblock javascript %}

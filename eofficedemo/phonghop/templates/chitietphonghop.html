@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block title %}Chi tiết phòng họp{% endblock %}
+{% block content %}
+    
+<div class="container">
+        
+    <div class="card">
+      </br>
+        
+      <div class="row">
+
+        <div class="col-sm-1">
+        </div>
+
+        <div class="col-sm-10">
+          <div class="row">
+            <div class="col-sm-3">
+              <img src="/media/logo.png" class="responsive-img" style="max-height:100px;max-width:100px; padding:5px">
+            </div>
+            <div class="col-sm-8">
+              
+              <h6>ĐĂNG KÝ PHÒNG HỌP</h6>
+              <small><small>Bộ phận: {{request.user.profile.phongban.name}}</small></small></br>
+              {% comment %} <small><small>Ngày viết đơn: <a class="text-danger">{{form.date|date:"d/m/Y"}}</a></small></small> {% endcomment %}
+              
+            </div>
+
+            <div class="col-sm-1">
+            </div>
+
+          </div>
+        </div>
+        <div class="col-sm-1">
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-1">
+        </div>
+
+        <div class="col-sm-10">
+          
+          <small><small>
+            <div class="mb-1 row">
+              <label for="statichovaten" class="col-sm-3 col-form-label">Họ và tên:</label>
+              <div class="col-sm-4">
+                <input class="form-control form-control-sm" type="text" value="{{request.user.last_name}} {{request.user.first_name}}" aria-label="readonly input example" readonly>
+              </div>
+              <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+              <label for="staticmsnv" class="col-sm-2 col-form-label">MSNV:</label>
+              <div class="col-sm-2">
+                <input class="form-control form-control-sm" type="text" value="VTC-{{request.user.profile.msnv}}" aria-label="readonly input example" readonly>
+              </div>
+            </div>
+          </small></small>
+          <small><small>
+            <div class="mb-1 row">
+              <label for="staticmsnv" class="col-sm-3 col-form-label">Ngày họp:</label>
+              <div class="col-sm-4">
+                <input class="form-control form-control-sm" type="text" value="{{post.date|date:"d/m/Y"}}" aria-label="readonly input example" readonly>
+              </div>
+            </div>
+          </small></small>
+          <small><small>
+            <div class="mb-1 row">
+              <label for="staticmsnv" class="col-sm-3 col-form-label">Từ:</label>
+              <div class="col-sm-2">
+                <input class="form-control form-control-sm" type="text" value="{{post.time_from|time:"H:i"}}" aria-label="readonly input example" readonly>
+              </div>
+              <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+              <label for="staticmsnv" class="col-sm-2 col-form-label">Đến:</label>
+              <div class="col-sm-2">
+                <input class="form-control form-control-sm" type="text" value="{{post.time_end|time:"H:i"}}" aria-label="readonly input example" readonly>
+              </div>
+            </div>
+          </small></small>
+          
+          <small><small>
+            <div class="mb-1 row">
+              <label for="staticmsnv" class="col-sm-3 col-form-label">Số người:</label>
+              <div class="col-sm-2">
+                <input class="form-control form-control-sm" type="text" value="{{post.num_per}}" aria-label="readonly input example" readonly>
+              </div>
+            </div>
+          </small></small>
+          <small><small>
+            <div class="mb-1 row">
+              <label for="staticmsnv" class="col-sm-3 col-form-label">Tiêu đề cuộc họp:</label>
+              <div class="col-sm-9">
+                <input class="form-control form-control-sm" type="text" value="{{post.title}}" aria-label="readonly input example" readonly>
+              </div>
+            </div>
+          </small></small>
+          
+          
+          <small><small>
+            <div class="mb-1 row">
+              <label for="staticmsnv" class="col-sm-3 col-form-label">Hình thức</label>
+              <div class="col-sm-4">
+                <input class="form-control form-control-sm" type="text" value="{{post.kind}}" aria-label="readonly input example" readonly>
+              </div>
+            </div>
+          </small></small>
+          
+          <small><small>
+            <div class="mb-1 row">
+              <label for="staticmsnv" class="col-sm-3 col-form-label">Phòng họp</label>
+              <div class="col-sm-4">
+                <input class="form-control form-control-sm" type="text" value="{{post.room}}" aria-label="readonly input example" readonly>
+              </div>
+            </div>
+          </small></small>
+          <small><small>
+            <div class="mb-1 row">
+              <label for="staticmsnv" class="col-sm-3 col-form-label">Điện thoại liên hệ:</label>
+              <div class="col-sm-4">
+                <input class="form-control form-control-sm" rows="3" type="text" value="{{request.user.profile.phone}}" aria-label="readonly input example" readonly>
+              </div>
+            </div>
+          </small></small>
+          
+        
+        </div>
+        <div class="col-sm-1">
+        </div>
+      </div>
+      </br>
+    </div>
+    
+    </br>
+    
+  </div>
+  <div class="card">
+
+    <div class="row">
+      <div class="col-sm-1">
+
+      </div>
+      
+      <div class="col-sm-10">
+          
+        {% comment %} <div class="row">
+            <div class="col-sm-4">
+              <small><small><strong>{{post.author}}</strong></small></small>
+              <small><small><small><small><i>Gửi yêu cầu {{post.date|date:"d/m/Y-h:m"}}</i></small></small></small></small>
+            </div>
+            <div class="col-sm-8">
+              <small><small><small></small></small></small>
+            </div>
+        </div> {% endcomment %}
+        <div class="row">
+          
+          <table class="table-responsive table table-striped table-sm">
+            
+            <tbody>
+              <tr>
+                <td class="col-sm-4">
+                  <small><small><strong>{{post.author}}</strong></small></small>
+                  <small><small><small><small><small><i>Gửi yêu cầu {{post.created|date:"d/m/Y-h:m"}}</i></small></small></small></small></small>
+                </td>
+                <td class="col-sm-8">
+
+                </td>
+              </tr>
+              {% for comment in post.comments.all %}
+                <tr>
+                  <td>
+                      <small><small><strong>{{comment.author}}</strong></small></small>
+                      <small><small><small><small><small><i>{{comment.status}} {{comment.date|date:"d/m/Y-h:m"}}</i></small></small></small></small></small>
+                  </td>
+                  <td>
+                      <small><small><small>{{comment.body}}</small></small></small>
+                  </td>
+                </tr>
+              {% endfor %}
+              
+              
+            </tbody>
+          </table>
+          
+
+        </div>
+      
+      
+        
+      </div>
+      <div class="col-sm-1">
+
+      </div>
+    </div>
+  </div> 
+  </br>
+  {% if user.is_authenticated %}
+    {% if post.status == 'request' %}
+      {% if request.user == post.approval %}
+        <form action='{% url "chitietphonghop" post.id %}' method='POST'>
+            {% csrf_token %}
+        
+            <label><small><small>Ghi chú</small></small></label>
+            {{form.body}}
+            </br>
+            <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+              Không đồng ý
+            </button>
+            <button name="button" type='submit' id="like-button" value="{{post.id}}" class="btn btn-primary btn-sm">
+              Đồng ý
+            </button>
+            {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+        </form>
+      {% endif %}
+    {% endif %}
+    {% if post.status == 'waiting' %}
+      {% if request.user == post.approvalbod %}
+        <form action='{% url "post_detail" post.id %}' method='POST'>
+            {% csrf_token %}
+        
+            <label><small><small>Ghi chú</small></small></label>
+            {{form.body}}
+            </br>
+            <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+              Không đồng ý
+            </button>
+            <button name="button" type='submit' id="like-button" value="{{post.id}}" class="btn btn-primary btn-sm">
+              Đồng ý
+            </button>
+            {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+        </form>
+      {% endif %}
+    {% endif %}
+    {% if post.status == 'rejected' %}
+      {% if request.user == post.author %}
+        <form action='{% url "post_detail" post.id %}' method='POST'>
+            {% csrf_token %}
+        
+            <label><small><small>Ghi chú</small></small></label>
+            {{form.body}}
+            </br>
+            <button name="button" type='submit' onclick="myFunctionB({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+              Hủy
+            </button>
+            <button name="button" type='submit' id="like-button" value="{{post.pk}}" class="btn btn-primary btn-sm">
+              Gửi lại
+            </button>
+            {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+        </form>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+</div>
+        
+    
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    
+  //answer
+  function myFunctionB(id){
+      
+      var button = $(this).attr("value");
+      let contentbody = document.querySelector("#id_body").value;
+      $.ajax({
+          type: 'POST',
+          url: '{% url "dislike" %}',
+          data: {
+            postid: $('#like-button').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            contentbody: contentbody,
+            action: 'post'
+          },
+          success: function (json) {
+            console.log("OK chu")
+          },
+          error: function (xhr, errmsg, err) {
+            console.log("thua luon roi");
+          }
+      });
+  }
+
+  //like button
+
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).on('click', '#like-button', function (e) {
+  
+  var button = $(this).attr("value");
+  let contentbody = document.querySelector("#id_body").value;
+
+  $.ajax({
+    type: 'POST',
+    url: '{% url "like" %}',
+    data: {
+      postid: $('#like-button').val(),
+      csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      contentbody: contentbody,
+      action: 'post'
+    },
+    success: function (json) {
+      console.log("OK chu")
+    },
+    error: function (xhr, errmsg, err) {
+      console.log("thua luon roi");
+    }
+  });
+})
+</script>
+{% endblock javascript %}

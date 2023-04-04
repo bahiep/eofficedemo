@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}Tạo đơn xin nghỉ phép{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h3><center>Tạo đơn xin nghỉ phép</center></h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+        
+                <div class="card">
+                  </br>
+                    
+                  <div class="row">
+          
+                    <div class="col-sm-1">
+                    </div>
+          
+                    <div class="col-sm-10">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <img src="/media/logo.png" class="responsive-img" style="max-height:100px;max-width:100px; padding:5px">
+                        </div>
+                        <div class="col-sm-8">
+                          
+                          <h6>ĐƠN XIN NGHỈ PHÉP</h6>
+                          <small><small>Bộ phận: {{request.user.profile.phongban.name}}</small></small></br>
+                          {% comment %} <small><small>Ngày viết đơn: <a class="text-danger">{{form.date|date:"d/m/Y"}}</a></small></small> {% endcomment %}
+                          
+                        </div>
+          
+                        <div class="col-sm-1">
+                        </div>
+          
+                      </div>
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-1">
+                    </div>
+          
+                    <div class="col-sm-10">
+                      
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="statichovaten" class="col-sm-3 col-form-label">Họ và tên:</label>
+                          <div class="col-sm-4">
+                            <input class="form-control form-control-sm" type="text" value="{{request.user.last_name}} {{request.user.first_name}}" aria-label="readonly input example" readonly>
+                          </div>
+                          <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                          <label for="staticmsnv" class="col-sm-2 col-form-label">MSNV:</label>
+                          <div class="col-sm-2">
+                            <input class="form-control form-control-sm" type="text" value="VTC-{{request.user.profile.msnv}}" aria-label="readonly input example" readonly>
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="statichovaten" class="col-sm-3 col-form-label">Phép năm:</label>
+                          <div class="col-sm-3">
+                            <input class="form-control form-control-sm" type="text" value="{{request.user.profile.sophepnam}}" aria-label="readonly input example" readonly>
+                          </div>
+                          
+                          <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Số ngày đã nghỉ:</label>
+                          <div class="col-sm-2">
+                            <input class="form-control form-control-sm" type="text" value="{{request.user.profile.songaynghiphep}}" aria-label="readonly input example" readonly>
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Số ngày phép còn lại:</label>
+                          <div class="col-sm-3">
+                            <input class="form-control form-control-sm" type="text" value="{{request.user.profile.songaynghiphepconlai}}" aria-label="readonly input example" readonly>
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Nghỉ từ ngày:</label>
+                          <div class="col-sm-3" id = "dateinput">
+                            {{form.date_from}}
+                          </div>
+                          <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                          <label for="staticmsnv" class="col-sm-2 col-form-label">Đến ngày:</label>
+                          <div class="col-sm-3">
+                            {{form.date_end}}
+                          </div>
+                        </div>
+                      </small></small>
+
+                      
+
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Số ngày nghỉ:</label>
+                          <div class="col-sm-3">
+                            {{form.numday}}
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Lý do xin nghỉ:</label>
+                          <div class="col-sm-6">
+                            {{form.reason}}
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Điện thoại liên hệ:</label>
+                          <div class="col-sm-6">
+                            <input class="form-control form-control-sm" rows="3" type="text" value="{{request.user.profile.phone}}" aria-label="readonly input example" readonly>
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Loại nghỉ phép</label>
+                          <div class="col-sm-6">
+                            {{form.title}}
+                          </div>
+                        </div>
+                      </small></small>
+                      
+                    
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
+                  </div>
+                  </br>
+                </div>
+                
+                </br>
+                
+              </div>
+            
+            <center><button class="btn btn-secondary btn-sm">Gửi duyệt</button></center>
+        </form>
+    {% else %}
+        You are not allowed here!
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    
+    
+  </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).on('change', '#id_date_from', function (e) {
+    
+        
+        let datefrom = new Date(document.querySelector("#id_date_from").value).getTime();
+        let dateend = new Date(document.querySelector("#id_date_end").value).getTime();
+        let num = Math.ceil((dateend - datefrom) / (24*60*60*1000));
+        
+        document.querySelector("#id_numday").value = num + 1
+        
+        
+    })
+    $(document).on('change', '#id_date_end', function (e) {
+    
+        
+        let datefrom = new Date(document.querySelector("#id_date_from").value).getTime();
+        let dateend = new Date(document.querySelector("#id_date_end").value).getTime();
+        let num = Math.ceil((dateend - datefrom) / (24*60*60*1000));
+        
+        document.querySelector("#id_numday").value = num + 1
+        
+        
+        
+    })
+</script>
+{% endblock javascript %}

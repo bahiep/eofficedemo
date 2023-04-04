@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container" style="grid-gap: 20px">
+  <div class="gap-3" >
+    <center>
+      {% if request.user.username == 'quyen.tran' %} 
+    <a class="btn btn-outline-info btn-sm" href="{% url 'staff' %}">
+        
+        <img src="/media/home/01.jpg" class="responsive-img rounded" style="max-height:200px; max-width:200px; padding:0.5px"></br>
+        <h6>Quản lý nhân sự</h6>
+        
+    </a>
+    {% endif %}
+    <a class="btn btn-outline-info btn-sm" href="{% url 'blog' %}" role="button">
+        <img src="/media/home/02.jpg" class="responsive-img rounded" style="max-height:200px; max-width:200px; padding:0.5px">
+        <h6>Đăng ký nghỉ phép</h6>
+    </a>
+    <a class="btn btn-outline-info btn-sm" href="{% url 'phonghop' %}" role="button">
+      <img src="/media/home/04.jpg" class="responsive-img rounded" style="max-height:200px; max-width:200px; padding:0.5px">
+      <h6>Đặt phòng họp</h6>
+    </a>
+    <a class="btn btn-outline-info btn-sm" data-bs-toggle="modal" href="#exampleModal" role="button" aria-controls="offcanvasExample">
+        <img src="/media/home/03.jpg" class="responsive-img rounded" style="max-height:200px; max-width:200px; padding:0.5px">
+        <h6>Đặt xe</h6>
+    </a>
+
+    
+    </center>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Viteccons thông báo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Tính năng đang phát triển vui lòng quay lại sau
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

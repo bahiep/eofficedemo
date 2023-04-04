@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+
+            {% block title %}
+            
+            {% endblock  %}
+        
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css"> {% endcomment %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        
+        
+       
+        {% comment %} <style>
+            html, body{
+                height:100%;
+                background-color: #f6f6f6
+            }
+        </style> {% endcomment %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="btn btn-outline-info btn-sm" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                <img src="/media/logongang.png" class="responsive-img" style="max-height:36px; padding:0.5px">
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                  </li>
+                  
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Đăng xuất</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{request.user}}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      {% comment %} <li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li> {% endcomment %}
+                      <li><a class="dropdown-item" href="{% url 'editprofile' %}">Cập nhật thông tin</a></li>
+                      {% comment %} <li><hr class="dropdown-divider"></li> {% endcomment %}
+                      {% comment %} <li><a class="dropdown-item" href="#">Something else here</a></li> {% endcomment %}
+                    </ul>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Đăng nhập</a>
+                  </li>
+                  {% endif %}
+
+                  
+                  {% comment %} <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  </li> {% endcomment %}
+
+                </ul>
+                {% if request.user.username == 'quyen.tran' %}
+                <form class="d-flex" method=POST action="{% url 'search-venues' %}">
+                  {% csrf_token %}
+                  <input class="form-control me-2" type="search" placeholder="Tìm nhân sự" aria-label="Search" name="searched">
+                  <button class="btn btn-outline-success" type="submit">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                      </svg>
+                  </button>
+                </form>
+                {% endif %}
+
+              </div>
+            </div>
+        </nav>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img src="{{request.user.profile.photo.url}}" class="responsive-img img-thumbnail" style="max-height:100px;max-width:100px; padding:5px"></h5>
+              
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <div>
+                <div class="row">
+                    
+                    <div class="col-md-12">
+                        <table class="table">
+                            <tbody>
+                              <tr>
+                                <td class="col-md-5"><small><small>Họ và tên</small></small></td>
+                                <td class="col-md-7"><small><small>: {{request.user.profile.hovaten}}</small></small></td>
+                                
+                              </tr>
+                              {% comment %} <tr>
+                                <td class="col-md-5"><small><small>Họ và tên</small></small></td>
+                                <td class="col-md-7"><small><small>: {{profile_form.hovaten}}</small></small></td>
+                                
+                              </tr> {% endcomment %}
+                              <tr>
+                                <td><small><small>MSNV</small></small></td>
+                                <td><small><small>: {{request.user.profile.msnv}}</small></small></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>Giới tính</small></small></td>
+                                <td><small><small>: {{request.user.profile.gioitinh}}</small></small></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>Ngày sinh</small></small></td>
+                                <td><small><small>: {{request.user.profile.ngaysinh|date:"d/m/Y"}}</small></small></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>Phòng/Ban</small></small></td>
+                                <td><small><small>: {{request.user.profile.phongban}}</small></small></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>Chức vụ</small></small></td>
+                                <td><small><small>: {{request.user.profile.chucdanh}}</small></small></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>Số phép năm</small></small></td>
+                                <td><small><small>: {{request.user.profile.sophepnam}}</small></small></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>Số ngày đã nghỉ</small></small></td>
+                                <td><small><small>: {{request.user.profile.songaynghiphep}}</small></small></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>Ngày vào công ty</small></small></br></td>
+                                <td><small><small>: {{request.user.profile.ngayvaocty|date:"d/m/Y"}}</small></small></br></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>Thâm niên</small></small></br></td>
+                                <td><small><small>: 07 năm</small></small></br></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>SĐT liên lạc</small></small></br></td>
+                                <td><small><small>: {{request.user.profile.phone}}</small></small></br></td>
+                              </tr>
+                              <tr>
+                                <td><small><small>Email</small></small></br></td>
+                                <td><small><small>: {{request.user.email}}</small></small></br></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                    {% comment %} <div class="col-md-5"><img src="{{request.user.profile.photo.url}}" class="img-thumbnail"></div> {% endcomment %}
+                  </div>
+              </div>
+              <div class="dropdown mt-3">
+                <center><button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                  Cập nhật
+                </button></center>
+              </br>
+                {% comment %} <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                  Cập nhật thông tin
+                </button> {% endcomment %}
+                {% comment %} <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li>
+                  <li><a class="dropdown-item" href="#">Cập nhật thông tin</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-1">
+                    
+                    </div>
+    
+                    <div class="col-sm-10">
+                        {% block content %}
+                    
+                        {% endblock  %}
+                    </div>
+                
+                    <div class="col-sm-1">
+                    
+                    </div>
+                <!--[if lt IE 7]>
+                    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+                <![endif]-->
+                </div>
+            </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+        {% block javascript %}
+    
+        {% endblock javascript %}
+    </body>
+</html>

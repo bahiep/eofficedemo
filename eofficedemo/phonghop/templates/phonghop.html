@@ -1,0 +1,710 @@
+{% extends "base.html" %}
+{% block title %}Quản lý phòng họp{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-0">
+            
+        </div>
+        <div class="col-sm-7">
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div id="carousel1" class="carousel-item active" data-bs-interval="10000">
+                    <img src="/media/phonghop4.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5><mark>PHÒNG HỌP OPAL</mark></h5>
+                      <p><mark><small>(Sức chứa tối đa: 30)</small></mark></p>
+                      <p><mark>Thời gian: từ thứ 3 đến thứ 5</mark></p>
+                      
+                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#phonghop1">
+                        Xem lịch đã đăng ký
+                      </button>
+                    
+                    </div>
+                  </div>
+                  <div id="carousel2" class="carousel-item" data-bs-interval="10000">
+                    <img src="/media/phonghop2.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5><mark>PHÒNG HỌP RUBY</mark></h5>
+                      <p><mark><small>(Sức chứa tối đa: 25)</small></mark></p>
+                      <p><mark>Thời gian: Linh hoạt</mark></p>
+                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#phonghop2">
+                        Xem lịch đã đăng ký
+                      </button>
+                    </div>
+                  </div>
+                  <div id="carousel3" class="carousel-item" data-bs-interval="10000">
+                    <img src="/media/phonghop3.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5><mark>PHÒNG HỌP AMBER</mark></h5>
+                      <p><mark><small>(Sức chứa tối đa: 15)</small></mark></p>
+                      <p><mark>Thời gian: Linh hoạt</mark></p>
+                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#phonghop3">
+                        Xem lịch đã đăng ký
+                      </button>
+                    </div>
+                  </div>
+                  <div id="carousel4" class="carousel-item" data-bs-interval="10000">
+                    <img src="/media/phonghop2.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5><mark>PHÒNG HỌP SAPHIRE</mark></h5>
+                      <p><mark><small>(Sức chứa tối đa: 15)</small></mark></p>
+                      <p><mark>Thời gian: Linh hoạt</mark></p>
+                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#phonghop4">
+                        Xem lịch đã đăng ký
+                      </button>
+                    </div>
+                  </div>
+                  <div id="carousel5" class="carousel-item" data-bs-interval="10000">
+                    <img src="/media/phonghop2.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5><mark>PHÒNG HỌP DIAMOND</mark></h5>
+                      <p><mark><small>(Sức chứa tối đa: 15)</small></mark></p>
+                      <p><mark>Thời gian: Linh hoạt</mark></p>
+                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#phonghop5">
+                        Xem lịch đã đăng ký
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+        <div class="col-sm-5">
+          </br>
+            <small>
+            <p>Hướng dẫn đăng ký phòng họp</p>
+            <small><li>Bước 1: Kiểm tra lịch họp không trùng các lịch đã đăng ký</li></small>
+            <small><li>Bước 2: Tiến hành đăng ký lịch họp</li></small>
+            <small><li>Bước 3: Chờ xác nhận của bộ phận quản lý phòng họp</li></small>
+            </small>
+            </br>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#BookingModal">
+              Đăng ký
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Đăng ký phòng họp</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form method="POST" enctype="multipart/form-data">
+                  <div class="modal-body">
+        
+                      {% csrf_token %}
+                      <div class="container">
+                          <div class="row">
+                              <small><small>
+                                <div class="mb-1 row">
+                                  <label for="statichovaten" class="col-sm-3 col-form-label">Họ và tên:</label>
+                                  <div class="col-sm-5">
+                                    <input class="form-control form-control-sm" type="text" value="{{request.user.last_name}} {{request.user.first_name}}" aria-label="readonly input example" readonly>
+                                  </div>
+                                </div>
+                              </small></small>
+                              <small><small>
+                                <div class="mb-1 row">
+                                  <label for="staticmsnv" class="col-sm-3 col-form-label">MSNV:</label>
+                                  <div class="col-sm-5">
+                                    <input class="form-control form-control-sm" type="text" value="VTC-{{request.user.profile.msnv}}" aria-label="readonly input example" readonly>
+                                  </div>
+                                </div>
+                              </small></small>
+                              <small><small>
+                                <div class="mb-1 row">
+                                  <label for="staticmsnv" class="col-sm-3 col-form-label">Ngày họp:</label>
+                                  <div class="col-sm-5">
+                                    {{form.date}}
+                                  </div>
+                                </div>
+                              </small></small>
+                              <small><small>
+                                <div class="mb-1 row">
+                                  <label for="staticmsnv" class="col-sm-3 col-form-label">Từ:</label>
+                                  <div class="col-sm-3">
+                                    {{form.time_from}}
+                                  </div>
+                                  <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                                  <label for="staticmsnv" class="col-sm-2 col-form-label">Đến:</label>
+                                  <div class="col-sm-3">
+                                    {{form.time_end}}
+                                  </div>
+                                </div>
+                              </small></small>
+                              
+                              <small><small>
+                                <div class="mb-1 row">
+                                  <label for="staticmsnv" class="col-sm-3 col-form-label">Số người:</label>
+                                  <div class="col-sm-3">
+                                    {{form.num_per}}
+                                  </div>
+                                </div>
+                              </small></small>
+                              <small><small>
+                                <div class="mb-1 row">
+                                  <label for="staticmsnv" class="col-sm-3 col-form-label">Tiêu đề cuộc họp:</label>
+                                  <div class="col-sm-6">
+                                    {{form.title}}
+                                  </div>
+                                </div>
+                              </small></small>
+                              <small><small>
+                                <div class="mb-1 row">
+                                  <label for="staticmsnv" class="col-sm-3 col-form-label">Hình thức:</label>
+                                  <div class="col-sm-6">
+                                    {{form.kind}}
+                                  </div>
+                                </div>
+                              </small></small>
+                              <small><small>
+                                <div class="mb-1 row">
+                                  <label for="staticmsnv" class="col-sm-3 col-form-label">Phòng họp đề xuất:</label>
+                                  <div class="col-sm-6">
+                                    {{form.room}}
+                                  </div>
+                                </div>
+                              </small></small>
+                              <small><small>
+                                <div class="mb-1 row">
+                                  <label for="staticmsnv" class="col-sm-3 col-form-label">Điện thoại liên hệ:</label>
+                                  <div class="col-sm-6">
+                                    <input class="form-control form-control-sm" type="text" value="{{request.user.profile.phone}}" aria-label="readonly input example" readonly>
+                                  </div>
+                                </div>
+                              </small></small>
+                              <small><small>
+                                <div class="mb-1 row">
+                                  Lưu ý: Phòng họp có thể thay đổi bởi bộ phận quản lý phòng họp vui lòng kiểm tra lại sau khi đăng ký thành công
+                                </div>
+                              </small></small>
+                              
+                              
+                          </div>
+                          
+                      </div>
+                    
+                      {% comment %} <center><button class="btn btn-secondary btn-sm">Gửi yêu cầu</button></center> {% endcomment %}
+                      <center>
+                      <button name="button" type='submit' id="btn_booking" value="booking" class="btn btn-secondary btn-sm">
+                        Đăng ký
+                      </button>
+                    </center>
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </br>
+    <div class="row">
+      <div class="accordion" id="accordionExample">
+        {% if Pending != 0 %}
+        {% if Pending.count != 0 %}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="{% if sumPending != "0" %}true{% else %}false{% endif %}" aria-controls="collapseOne">
+              Các yêu cầu đăng ký phòng họp ({{Pending.count}})
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse {% if Pengding != 0 %}show{% else %}{% endif %}" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              {% if Pending != 0 %}
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                    <th scope="col"><center>STT</center></th>
+                    <th scope="col">Đối tượng</th>
+                    <th scope="col">Ngày</th>
+                    <th scope="col">Thời gian</th>
+                    <th scope="col">Tình trạng</th>
+                    </tr>
+                  </thead>
+                  
+                  
+                  {% for post in Pending %}
+                  <tbody>
+                    <tr>
+                      <th scope="row"><center>{{ forloop.counter}}</center></th>
+                        <td><a href="{% url 'dangkyphonghop' post.pk %}">{{post.author.last_name}} {{post.author.first_name}}</td>
+                        <td>
+                          <small>
+                          {{post.date|date:"d-m-Y"}}
+                          </small>
+                        </td>
+                        <td>{{post.time_from|time:"H:i"}}-{{post.time_end|time:"H:i"}}</td>
+                        <td>
+                          {% if post.status == 'request' %} Chờ duyệt: <a class="text-danger">{{post.approval}}</a>{% endif %}{% if post.status == 'waiting' %} Chờ duyệt: <a class="text-danger">{{post.approvalbod}}</a>{% endif %}{% if post.status == 'rejected' %} <a class="text-danger">Không đồng ý</a>{% endif %}{% if post.status == 'approved' %} <a class="text-primary">Đã duyệt</a> {% endif %}
+    
+                        </td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+              
+                </table>
+              {% else %}
+                <small><small><i><center>Chưa có lịch họp</center></i></small></small>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% if Requesting %}
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Lịch họp của tôi ({{Requesting.count}})
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse {% if Pending == 0 %}{% if Requesting.count != 0 %}show{% else %}{% endif %}{% endif %}" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                {% if Requesting.count != 0 %}
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                      <th scope="col"><center>STT</center></th>
+                      <th scope="col">Đối tượng</th>
+                      <th scope="col">Ngày</th>
+                      <th scope="col">Thời gian</th>
+                      <th scope="col">Tình trạng</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                      {% for post in Requesting %}
+                        <tr>
+                            <th scope="row"><center>{{ forloop.counter }}</center></th>
+                            <td><a href="{% if post.status == 'request' %} {% url 'dangkyphonghop' post.pk %}{% elif post.status == 'rejected' %} {% url 'dangkyphonghop' post.pk %} {% else %} {% url 'chitietphonghop' post.pk %} {% endif %}">{{post.author.last_name}} {{post.author.first_name}}</td>
+                            <td>{{post.date|date:"d-m-Y"}}</td>
+                            <td>{{post.time_from|time:"H:i"}}-{{post.time_end|time:"H:i"}}</td>
+                            <td>
+                              {% if post.status == 'request' %} Chờ duyệt: <a class="text-danger">{{post.approval}}</a>{% endif %}{% if post.status == 'waiting' %} Chờ duyệt: <a class="text-danger">{{post.approvalbod}}</a>{% endif %}{% if post.status == 'rejected' %} <a class="text-danger">Không đồng ý</a>{% endif %}{% if post.status == 'approved' %} <a class="text-primary">Đã duyệt</a> {% endif %}
+                            </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% else %}
+                <small><small><i><center>Không có đơn nghỉ phép</center></i></small></small>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Phòng họp đã đăng ký ({{Approved.count}})
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              {% if Approved.count != 0 %}
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                    <th scope="col"><center>STT</center></th>
+                    <th scope="col">Đối tượng</th>
+                    <th scope="col">Ngày</th>
+                    <th scope="col">Thời gian</th>
+                    <th scope="col">Tình trạng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                    {% for post in Approved %}
+                      <tr>
+                          <th scope="row"><center>{{ forloop.counter }}</center></th>
+                          <td><a href="{% url 'chitietphonghop' post.pk %}">{{post.author.last_name}} {{post.author.first_name}}</td>
+                          <td>{{post.date|date:"d-m-Y"}}</td>
+                          <td>{{post.time_from|time:"H:i"}}-{{post.time_end|time:"H:i"}}</td>
+                          <td>
+                            {% if post.status == 'request' %} Chờ duyệt: <a class="text-danger">{{post.approval}}</a>{% endif %}{% if post.status == 'waiting' %} Chờ duyệt: <a class="text-danger">{{post.approvalbod}}</a>{% endif %}{% if post.status == 'rejected' %} <a class="text-danger">Không đồng ý</a>{% endif %}{% if post.status == 'approved' %} <a class="text-primary">Đã duyệt</a> {% endif %}
+                          </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+              <small><small><i><center>Chưa có lịch họp nào đã đăng ký thành công</center></i></small></small>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        
+        {% if MyApproved != 0 %}
+        {% if MyApproved.count != 0 %}
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Tất cả ({{MyApproved.count}})
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                {% if MyApproved.count != 0 %}
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                      <th scope="col"><center>STT</center></th>
+                      <th scope="col">Đối tượng</th>
+                      <th scope="col">Ngày</th>
+                      <th scope="col">Thời gian</th>
+                      <th scope="col">Tình trạng</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                      {% for post in MyApproved %}
+                        <tr>
+                            <th scope="row"><center>{{ forloop.counter }}</center></th>
+                            <td><a href="{% url 'chitietphonghop' post.pk %}">{{post.author.last_name}} {{post.author.first_name}}</td>
+                              <td>{{post.date|date:"d-m-Y"}}</td>
+                              <td>{{post.time_from|time:"H:i"}}-{{post.time_end|time:"H:i"}}</td>
+                            <td>
+                              {% if post.status == 'request' %} Chờ duyệt: <a class="text-danger">{{post.approval}}</a>{% endif %}{% if post.status == 'waiting' %} Chờ duyệt: <a class="text-danger">{{post.approvalbod}}</a>{% endif %}{% if post.status == 'rejected' %} <a class="text-danger">Không đồng ý</a>{% endif %}{% if post.status == 'approved' %} <a class="text-primary">Đã duyệt</a> {% endif %}
+                            </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% else %}
+                <small><small><i><center>Chưa có lịch họp nào đã đăng ký thành công</center></i></small></small>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% endif %}
+      </div>
+        
+    </div>
+    
+    <br/>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="phonghop1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Phòng họp OPAL</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% if Opal.count != 0 %}
+            Danh sách lịch họp đã đăng ký:
+            {% for post in Opal %}
+              <li>{{post.date|date:"d/m/Y"}} {{post.author}} Từ {{post.time_from|time:"H:i"}} Đến {{post.time_end|time:"H:i"}}</li>
+            {% endfor %}
+          {% else %}
+            Chưa có lịch họp
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="phonghop2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Phòng họp RUBY</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% if Ruby.count != 0 %}
+            Danh sách lịch họp đã đăng ký:
+            {% for post in Ruby %}
+              <li>{{post.date|date:"d/m/Y"}} {{post.author}} Từ {{post.time_from|time:"H:i"}} Đến {{post.time_end|time:"H:i"}}</li>
+            {% endfor %}
+          {% else %}
+            Chưa có lịch họp
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          {% comment %} <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="phonghop3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Phòng họp AMBER</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% if Amber.count != 0 %}
+            Danh sách lịch họp đã đăng ký:
+            {% for post in Amber %}
+              <li>{{post.date|date:"d/m/Y"}} {{post.author}} Từ {{post.time_from|time:"H:i"}} Đến {{post.time_end|time:"H:i"}}</li>
+            {% endfor %}
+          {% else %}
+            Chưa có lịch họp
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          {% comment %} <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="phonghop4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Phòng họp SAPHIRE</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% if Saphire.count != 0 %}
+            Danh sách lịch họp đã đăng ký:
+            {% for post in Saphire %}
+              <li>{{post.date|date:"d/m/Y"}} {{post.author}} Từ {{post.time_from|time:"H:i"}} Đến {{post.time_end|time:"H:i"}}</li>
+            {% endfor %}
+          {% else %}
+            Chưa có lịch họp
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          {% comment %} <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="phonghop5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Phòng họp DIAMOND</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% if Diamond.count != 0 %}
+            Danh sách lịch họp đã đăng ký:
+            {% for post in Diamond %}
+              <li>{{post.date|date:"d/m/Y"}} {{post.author}} Từ {{post.time_from|time:"H:i"}} Đến {{post.time_end|time:"H:i"}}</li>
+            {% endfor %}
+          {% else %}
+            Chưa có lịch họp
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          {% comment %} <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    
+    
+  </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  
+  $(document).on('change', '#id_room', function (e) {
+    let select = document.getElementById("id_time_from");
+    let options = select.options;
+    select.value = options[0].value;
+    let room = document.getElementById("id_room");
+    
+    for (let i = 0; i < options.length; i++) {
+      options[i].disabled = false;
+    }
+    
+    // Lấy dữ liệu bài post bằng AJAX
+    
+    fetch("{% url 'get_posts' %}")
+    .then(response => response.json())
+    .then(data => {
+      // Truyền dữ liệu vào template bằng JavaScript
+      const posts = data.posts;
+      posts.forEach(post => {
+        const selectdate = document.getElementById("id_date");
+        if (selectdate.value == post.date && room.value == post.room) {
+          const timeString = post.time_from;
+          const timeParts = timeString.split(":");
+          const hour = timeParts[0]; // Lấy giờ
+          const minute = timeParts[1]; // Lấy phút
+          const hm = hour + ":" + minute;
+
+          let startTime = post.time_from;
+          let endTime = post.time_end;
+          // Chuyển đổi thời gian đầu và cuối sang đối tượng Date
+          let startDate = new Date(`2000/01/01 ${startTime}`);
+          let endDate = new Date(`2000/01/01 ${endTime}`);
+          let times = [startTime];
+          
+          // Thêm các thời gian mới vào list với khoảng cách là 30 phút
+          let currentTime = startDate;
+          while (currentTime < endDate) {
+            
+            const hours = currentTime.getHours();
+            const minutes = currentTime.getMinutes();
+            const formattedTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0');
+            //Conditions
+            for (let i = 0; i < options.length; i++) {
+              if (options[i].value == formattedTime){
+                options[i].disabled = true;
+              }
+            }
+            //Step+
+            currentTime.setTime(currentTime.getTime() + 1800000);
+            times.push(currentTime.toLocaleTimeString('en-US', {hour12: false}));
+            console.log(formattedTime) 
+          }
+        }
+      });
+    })
+    .catch(error => console.error(error)); 
+  })
+</script>
+
+<script>
+  
+  $(document).on('change', '#id_date', function (e) {
+    let select = document.getElementById("id_time_from");
+    let options = select.options;
+    select.value = options[0].value;
+    let room = document.getElementById("id_room");
+    
+    for (let i = 0; i < options.length; i++) {
+      options[i].disabled = false;
+    }
+    
+    // Lấy dữ liệu bài post bằng AJAX
+    
+    fetch("{% url 'get_posts' %}")
+    .then(response => response.json())
+    .then(data => {
+      // Truyền dữ liệu vào template bằng JavaScript
+      const posts = data.posts;
+      posts.forEach(post => {
+        const selectdate = document.getElementById("id_date");
+        if (selectdate.value == post.date && room.value == post.room) {
+          const timeString = post.time_from;
+          const timeParts = timeString.split(":");
+          const hour = timeParts[0]; // Lấy giờ
+          const minute = timeParts[1]; // Lấy phút
+          const hm = hour + ":" + minute;
+
+          let startTime = post.time_from;
+          let endTime = post.time_end;
+          // Chuyển đổi thời gian đầu và cuối sang đối tượng Date
+          let startDate = new Date(`2000/01/01 ${startTime}`);
+          let endDate = new Date(`2000/01/01 ${endTime}`);
+          let times = [startTime];
+          
+          // Thêm các thời gian mới vào list với khoảng cách là 30 phút
+          let currentTime = startDate;
+          while (currentTime < endDate) {
+            
+            const hours = currentTime.getHours();
+            const minutes = currentTime.getMinutes();
+            const formattedTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0');
+            //Conditions
+            for (let i = 0; i < options.length; i++) {
+              if (options[i].value == formattedTime){
+                options[i].disabled = true;
+              }
+            }
+            //Step+
+            currentTime.setTime(currentTime.getTime() + 1800000);
+            times.push(currentTime.toLocaleTimeString('en-US', {hour12: false}));
+            console.log(formattedTime) 
+          }
+        }
+      });
+    })
+    .catch(error => console.error(error)); 
+  })
+</script>
+
+<script>
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+  document.getElementById("id_date").setAttribute("min", today);
+</script>
+
+<script>
+  $(document).on('change', '#id_time_from', function (e) {
+    let select = document.getElementById("id_time_end");
+    let options = select.options;
+    select.value = options[0].value;
+    for (let i = 0; i < options.length; i++) {
+      options[i].disabled = true;
+    }
+    let selecta = document.getElementById("id_time_from");
+    let indexa = selecta.selectedIndex;
+    let optionsa = selecta.options;
+    let indexb;
+    for (let i = indexa; i < optionsa.length; i++) {
+      if (optionsa[i].disabled == true) {
+        indexb = i;
+        break;
+      }
+      else {
+        indexb = 23;
+      }
+    }
+    for (let j = indexa+1; j <= indexb; j++) {
+      options[j].disabled = false;
+    }
+      
+    
+  })
+</script>
+<script>
+  const submitBtn = document.getElementById('btn_booking');
+  const timeFromInput2 = document.getElementById('id_time_from');
+  const timeEndInput2 = document.getElementById('id_time_end');
+
+  submitBtn.addEventListener('click', (event) => {
+    if (timeFromInput2.selectedIndex == 0 || timeEndInput2.selectedIndex == 0 ) {
+      event.preventDefault();
+      alert('Vui lòng kiểm tra thời gian bắt đầu hoặc kết thúc!');
+    }
+});
+
+</script>
+{% endblock javascript %}

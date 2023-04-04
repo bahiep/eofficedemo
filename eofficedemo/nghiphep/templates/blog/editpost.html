@@ -1,0 +1,475 @@
+{% extends "base.html" %}
+
+{% block title %}Tạo đơn xin nghỉ phép{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <h3><center>Cập nhật đơn xin nghỉ phép</center></h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+        
+                <div class="card">
+                  </br>
+                    
+                  <div class="row">
+          
+                    <div class="col-sm-1">
+                    </div>
+          
+                    <div class="col-sm-10">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <img src="/media/logo.png" class="responsive-img" style="max-height:100px;max-width:100px; padding:5px">
+                        </div>
+                        <div class="col-sm-8">
+                          
+                          <h6>ĐƠN XIN NGHỈ PHÉP</h6>
+                          <small><small>Bộ phận: {{request.user.profile.phongban.name}}</small></small></br>
+                          <small><small>Ngày viết đơn: <a class="text-danger">{{post.date|date:"d/m/Y"}}</a></small></small>
+                          
+                        </div>
+          
+                        <div class="col-sm-1">
+                        </div>
+          
+                      </div>
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-1">
+                    </div>
+          
+                    <div class="col-sm-10">
+                      
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="statichovaten" class="col-sm-3 col-form-label">Họ và tên:</label>
+                          <div class="col-sm-4">
+                            <input class="form-control form-control-sm" type="text" value="{{request.user.last_name}} {{request.user.first_name}}" aria-label="readonly input example" readonly>
+                          </div>
+                          <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                          <label for="staticmsnv" class="col-sm-2 col-form-label">MSNV:</label>
+                          <div class="col-sm-2">
+                            <input class="form-control form-control-sm" type="text" value="VTC-{{request.user.profile.msnv}}" aria-label="readonly input example" readonly>
+                          </div>
+                        </div>
+                      </small></small>
+                      
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="statichovaten" class="col-sm-3 col-form-label">Phép năm:</label>
+                          <div class="col-sm-3">
+                            <input class="form-control form-control-sm" type="text" value="{{post.author.profile.sophepnam}}" aria-label="readonly input example" readonly>
+                          </div>
+                          
+                          <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Số ngày đã nghỉ:</label>
+                          <div class="col-sm-2">
+                            <input class="form-control form-control-sm" type="text" value="{{post.author.profile.songaynghiphep}}" aria-label="readonly input example" readonly>
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Số ngày phép còn lại:</label>
+                          <div class="col-sm-3">
+                            <input class="form-control form-control-sm" type="text" value="{{post.author.profile.songaynghiphepconlai}}" aria-label="readonly input example" readonly>
+                          </div>
+                        </div>
+                      </small></small>
+
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Nghỉ từ ngày:</label>
+                          <div class="col-sm-3" id = "dateinput">
+                            {{editform.date_from}}
+                          </div>
+                          <label for="staticmsnv" class="col-sm-1 col-form-label"></label>
+                          <label for="staticmsnv" class="col-sm-2 col-form-label">Đến ngày:</label>
+                          <div class="col-sm-3">
+                            {{editform.date_end}}
+                          </div>
+                        </div>
+                      </small></small>
+                      
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Số ngày nghỉ:</label>
+                          <div class="col-sm-3">
+                            {{editform.numday}}
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Lý do xin nghỉ:</label>
+                          <div class="col-sm-6">
+                            {{editform.reason}}
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Điện thoại liên hệ:</label>
+                          <div class="col-sm-6">
+                            <input class="form-control form-control-sm" rows="3" type="text" value="{{post.author.profile.phone}}" aria-label="readonly input example" readonly>
+                            
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Loại nghỉ phép</label>
+                          <div class="col-sm-6">
+                            {{editform.title}}
+                          </div>
+                        </div>
+                      </small></small>
+                      <small><small>
+                        <div class="mb-1 row">
+                          <label for="staticmsnv" class="col-sm-3 col-form-label">Trạng thái:</label>
+                          <div class="col-sm-6">
+                            <ul class="list-group">
+                              
+                              {% if post.status == 'request' %}
+                                {% if post.approval == post.approvalbod %}
+                                  <li class="list-group-item">
+                                    Chờ duyệt: <a class="text-danger">{{post.approval}}</a>
+                                  </li>
+                                {% else %}
+                                  {% if post.numday < 3 %}
+                                  <li class="list-group-item">
+                                    Chờ duyệt: <a class="text-danger">{{post.approval}}</a>
+                                  </li>
+                                  {% else %}
+                                  <li class="list-group-item">
+                                    Chờ duyệt: <a class="text-danger">{{post.approval}}</a>
+                                  </li>
+                                  <li class="list-group-item">
+                                    Tiếp theo: <a class="text-danger">{{post.approvalbod}}</a>
+                                  </li>
+                                  {% endif %}
+                                {% endif %}
+                              {% endif %}
+          
+                              {% if post.status == 'waiting' %} 
+                              <li class="list-group-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                  <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                </svg>
+                                Đã duyệt: <a class="text-primary">{{post.approval}}</a> 
+                                
+                              </li>
+                              <li class="list-group-item">
+                                Chờ duyệt: <a class="text-danger">{{post.approvalbod}}</a>
+                              </li>
+                              {% endif %}
+          
+                              {% if post.status == 'rejected' %} 
+                                {% if Approvallike %}
+                                <li class="list-group-item">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                  </svg> 
+                                  Đã duyệt: <a class="text-primary">{{post.approval}}</a> 
+                                  
+                                </li>
+                                <li class="list-group-item">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg> 
+                                  Không đồng ý: <a class="text-danger">{{post.approvalbod}}</a> 
+                                  
+                                </li>
+                                {% else %}
+                                <li class="list-group-item">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg>
+                                  Không đồng ý: <a class="text-danger">{{post.approval}}</a> 
+                                  
+                                </li>
+                                {% endif %}
+                              {% endif %}
+          
+                              {% if post.status == 'approved' %}
+                                {% if post.approval == post.approvalbod %}
+                                  <li class="list-group-item">
+                                    Đã duyệt: <a class="text-primary">{{post.approval}}</a> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                      <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                    </svg>
+                                  </li>
+                                {% else %}
+                                  {% if post.numday < 3 %}
+                                  <li class="list-group-item">
+                                    Đã duyệt: <a class="text-primary">{{post.approval}}</a> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                      <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                    </svg>
+                                  </li>
+                                  { % else %}
+                                  <li class="list-group-item">
+                                    Đã duyệt: <a class="text-primary">{{post.approval}}</a> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                      <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                    </svg>
+                                  </li>
+                                  <li class="list-group-item">
+                                    Đã duyệt: <a class="text-primary">{{post.approvalbod}}</a> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                      <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                    </svg>
+                                  </li>
+                                  {% endif %}
+                                {% endif %}
+                                
+                              {% endif %}
+                            </ul>
+                          </div>
+                        </div>
+                      </small></small>
+                    
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
+                  </div>
+                  </br>
+                </div>
+                
+                </br>
+                <div class="card">
+        
+                  <div class="row">
+                    <div class="col-sm-1">
+          
+                    </div>
+                    
+                    <div class="col-sm-10">
+                        
+                      <div class="row">
+                        
+                        <table class="table-responsive table table-striped table-sm">
+                          
+                          <tbody>
+                            <tr>
+                              <td class="col-sm-4">
+                                <small><small><strong>{{post.author}}</strong></small></small>
+                                <small><small><small><small><small><i>Gửi yêu cầu {{post.date|date:"d/m/Y-h:m"}}</i></small></small></small></small></small>
+                              </td>
+                              <td class="col-sm-8">
+          
+                              </td>
+                            </tr>
+                            {% for comment in post.comments.all %}
+                              <tr>
+                                <td>
+                                    <small><small><strong>{{comment.author}}</strong></small></small>
+                                    <small><small><small><small><small><i>{{comment.status}} {{comment.date|date:"d/m/Y-h:m"}}</i></small></small></small></small></small>
+                                </td>
+                                <td>
+                                    <small><small><small>{{comment.body}}</small></small></small>
+                                </td>
+                              </tr>
+                            {% endfor %}
+                            
+                            
+                          </tbody>
+                        </table>
+                        {% comment %} {% for comment in post.comments.all %}
+                        <div class="col-sm-4">
+                          <small><small><strong>{{comment.author}}</strong></small></small>
+                          <small><small><small><small><i>{{comment.status}} {{comment.date|date:"d/m/Y-h:m"}}</i></small></small></small></small>
+                        </div>
+                        <div class="col-sm-8">
+                          <small><small><small>{{comment.body}}</small></small></small>
+                        </div>
+                        {% endfor %} {% endcomment %}
+          
+                      </div>
+                    
+                    
+                      
+                    </div>
+                    <div class="col-sm-1">
+          
+                    </div>
+                  </div>
+                </div> 
+                </br>
+                {% if user.is_authenticated %}
+                  {% if post.status == 'request' %}
+                    {% if request.user == post.approval %}
+                      <form action='{% url "post_detail" post.id %}' method='POST'>
+                          {% csrf_token %}
+                      
+                          <label><small><small>Ghi chú</small></small></label>
+                          {{form.body}}
+                          </br>
+                          <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+                            Không đồng ý
+                          </button>
+                          <button name="button" type='submit' id="like-button" value="{{post.id}}" class="btn btn-primary btn-sm">
+                            Đồng ý
+                          </button>
+                          {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+                      </form>
+                    {% endif %}
+                    {% if request.user == post.author %}
+                      <form action='{% url "post_detail" post.id %}' method='POST'>
+                          {% csrf_token %}
+                      
+                          <label><small><small>Ghi chú</small></small></label>
+                          {{form.body}}
+                          </br>
+                          <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+                            Hủy
+                          </button>
+                          <button name="button" type='submit' id="like-button" value="{{post.pk}}" class="btn btn-primary btn-sm">
+                            Cập nhật
+                          </button>
+                          {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+                      </form>
+                    {% endif %}
+                  {% endif %}
+                  {% if post.status == 'waiting' %}
+                    {% if request.user == post.approvalbod %}
+                      <form action='{% url "post_detail" post.id %}' method='POST'>
+                          {% csrf_token %}
+                      
+                          <label><small><small>Ghi chú</small></small></label>
+                          {{form.body}}
+                          </br>
+                          <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+                            Không đồng ý
+                          </button>
+                          <button name="button" type='submit' id="like-button" value="{{post.id}}" class="btn btn-primary btn-sm">
+                            Đồng ý
+                          </button>
+                          {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+                      </form>
+                    {% endif %}
+                  {% endif %}
+                  {% if post.status == 'rejected' %}
+                    {% if request.user == post.author %}
+                      <form action='{% url "post_detail" post.id %}' method='POST'>
+                          {% csrf_token %}
+                      
+                          <label><small><small>Ghi chú</small></small></label>
+                          {{form.body}}
+                          </br>
+                          <button name="button" type='submit' onclick="myFunctionA({{post.id}})" id="{{post.id}}" class="btn btn-danger btn-sm">
+                            Hủy
+                          </button>
+                          <button name="button" type='submit' id="like-button" value="{{post.pk}}" class="btn btn-primary btn-sm">
+                            Gửi lại
+                          </button>
+                          {% comment %} <input type='submit' value='Binh luan'/> {% endcomment %}
+                      </form>
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              </div>
+            
+            
+        </form>
+    {% else %}
+        You are not allowed here!
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    
+  //answer
+  function myFunctionA(id){
+        
+    var button = $(this).attr("value");
+    let contentbody = document.querySelector("#id_body").value;
+    $.ajax({
+        type: 'POST',
+        url: '{% url "dislikepost" %}',
+        data: {
+          postid: $('#like-button').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+          contentbody: contentbody,
+          action: 'post'
+        },
+        success: function (json) {
+          console.log("OK chu")
+        },
+        error: function (xhr, errmsg, err) {
+          console.log("thua luon roi");
+        }
+    });
+}
+
+  //like button
+
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).on('click', '#like-button', function (e) {
+    
+    var button = $(this).attr("value");
+    let contentbody = document.querySelector("#id_body").value;
+
+    $.ajax({
+      type: 'POST',
+      url: '{% url "likepost" %}',
+      data: {
+        postid: $('#like-button').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        contentbody: contentbody,
+        action: 'post'
+      },
+      success: function (json) {
+        console.log("OK chu")
+      },
+      error: function (xhr, errmsg, err) {
+        console.log("thua luon roi");
+      }
+    });
+  })
+</script>
+<script>
+  $(document).on('change', '#id_date_from', function (e) {
+  
+      
+      let datefrom = new Date(document.querySelector("#id_date_from").value).getTime();
+      let dateend = new Date(document.querySelector("#id_date_end").value).getTime();
+      let num = Math.ceil((dateend - datefrom) / (24*60*60*1000));
+      
+      document.querySelector("#id_numday").value = num + 1
+      
+      
+  })
+  $(document).on('change', '#id_date_end', function (e) {
+  
+      
+      let datefrom = new Date(document.querySelector("#id_date_from").value).getTime();
+      let dateend = new Date(document.querySelector("#id_date_end").value).getTime();
+      let num = Math.ceil((dateend - datefrom) / (24*60*60*1000));
+      
+      document.querySelector("#id_numday").value = num + 1
+      
+      
+      
+  })
+</script>
+{% endblock javascript %}
+

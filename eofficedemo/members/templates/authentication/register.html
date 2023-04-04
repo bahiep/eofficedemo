@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+
+            {% block title %}
+            
+            {% endblock  %}
+        
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css"> {% endcomment %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        {% comment %} <style>
+            html, body{
+                height:100%;
+                background-color: #f6f6f6
+            }
+        </style> {% endcomment %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="btn btn-outline-info btn-sm" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                <img src="/media/logongang.png" class="responsive-img" style="max-height:36px; padding:0.5px">
+              </a>
+              
+              
+            </div>
+        </nav>
+        {% if form.errors %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Thông báo</strong> Tài khoản đăng ký không hợp lệ
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+        </br>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                    
+                    </div>
+    
+                    <div class="col-sm-6">
+
+                        <h4>Đăng ký</h4>
+                        {% if form.errors %}
+                        <p>
+                            Tải khoản không hợp lệ
+                        </p>
+                        {% else %}
+                        <h6>Điền thông tin dưới đây để đăng ký:</h6>
+                        {% endif %}
+                        <div class="login-form">
+                            <form action="{% url 'register' %}" method="POST">
+                                {% csrf_token %}
+                                <label for="staticEmail" class="col-sm-12 col-form-label">Tài khoản</label>{{form.username}}
+                                <label for="staticEmail" class="col-sm-12 col-form-label">Tên</label>{{form.first_name}}
+                                <label for="staticEmail" class="col-sm-12 col-form-label">Họ</label>{{form.last_name}}
+                                <label for="staticEmail" class="col-sm-12 col-form-label">Email</label>{{form.email}}
+                                <label for="staticEmail" class="col-sm-12 col-form-label">Mật khẩu</label>{{form.password1}}
+                                <label for="staticEmail" class="col-sm-12 col-form-label">Nhập lại mật khẩu</label>{{form.password2}}
+                            </br>
+                                <p><input type="submit" value="Đăng ký" class='btn btn-secondary btn-sm'></p>
+                            </form>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="col-sm-3">
+                    
+                    </div>
+                <!--[if lt IE 7]>
+                    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+                <![endif]-->
+                </div>
+            </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+        {% block javascript %}
+    
+        {% endblock javascript %}
+    </body>
+</html>
+
+
+
